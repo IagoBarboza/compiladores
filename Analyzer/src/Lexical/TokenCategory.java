@@ -1,0 +1,58 @@
+package Lexical;
+
+public enum TokenCategory {
+	
+	MAIN(1),
+	ID(2),
+	TNONE(3),
+	TINT(4), 
+	TFLOAT(5),
+	TCHAR(6),
+	TSTRING(7),
+	TLOGIC(8),
+	SCOPEBEGIN(9),
+	SCOPEEND(10),
+	PARAMBEGIN(11),
+	PARAMEND(12),
+	ARRAYBEGIN(13),
+	ARRAYEND(14),
+	TERM(15),
+	COMMA(17),
+	SEMICOLON(18),
+	INTNUMCONST(19),
+	DECNUMCONST(20),
+	LOGICCONST(21),
+	CHARCONST(22),
+	STRINGCONST(23),
+	RWREAD(24),
+	RWPRINT(25),
+	RWIF(26),
+	RWELSE(27),
+	RWREPEATER(28),
+	RWWHILE(29),
+	RWRETURN(30),
+	ATTRIBUTIVEOP(31),
+	ANDLOGICOP(32),
+	ORLOGICOP(33),
+	NEGLOGICOP(34),
+	ADDARITHOP(35),
+	MULTARITHOP(36),
+	EXPARITHOP(37),
+	UNNEGOP(38),
+	EQRELOP(39),
+	INEQRELOP(40),
+	CONCOP(41),
+	UNDEFINED(42);
+	
+	private int value;
+	
+	private TokenCategory(int value) {
+		this.value = value;
+	}
+	
+	public int getCategoryValue() {
+		return value;
+	}
+	
+
+}
