@@ -12,6 +12,7 @@ public class Table {
 	public static Map<String, TokenCategory> delimiters = new HashMap<>();
 	public static Map<String, TokenCategory> separators = new HashMap<>();
 	public static Map<String, TokenCategory> operators = new HashMap<>();
+	public static List<String> relationalOperators = new ArrayList<>();
 	
 	static {
 		// Symbol List		
@@ -61,8 +62,7 @@ public class Table {
 		reservedWords.put("not", TokenCategory.NEGLOGICOP);
 		reservedWords.put("and", TokenCategory.ANDLOGICOP);
 		reservedWords.put("or", TokenCategory.ORLOGICOP);
-		reservedWords.put("not", TokenCategory.NEGLOGICOP);
-		
+
 		// Delimiters
 		delimiters.put("{", TokenCategory.SCOPEBEGIN);
 		delimiters.put("}", TokenCategory.SCOPEEND);
@@ -90,5 +90,13 @@ public class Table {
 		operators.put("~=", TokenCategory.EQRELOP);
 		operators.put("=", TokenCategory.ATTRIBUTIVEOP);
 		operators.put("++", TokenCategory.CONCOP);
+		
+		// Relational Operators
+		relationalOperators.add(">");
+		relationalOperators.add(">=");
+		relationalOperators.add("<");
+		relationalOperators.add("<=");
+		relationalOperators.add("==");
+		relationalOperators.add("~=");
 	}
 }

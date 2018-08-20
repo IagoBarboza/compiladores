@@ -27,7 +27,6 @@ public class Lexical {
 	}
 	
 	public Token nextToken() {
-		
 		// First line or line already explored		
 		if (this.line == null || this.currentCol == this.line.length()-1) {
 			this.readLine();
@@ -35,7 +34,9 @@ public class Lexical {
 			tkLine++;
 			this.currentCol = -1;
 			tkCol = -1;
-		}
+		} 
+		
+		if (this.line.isEmpty()) return this.nextToken();
 		
 		this.tkValue = "";
 		this.tkCol++;
@@ -50,20 +51,60 @@ public class Lexical {
 		}
 		
 		this.tkValue += this.c;
-		this.readChar();
-		if (Table.operators.containsKey(this.tkValue + this.c)) {
+		
+		// Id, decimal numerical constant, integer numerical constant, reserved word 
+		if (!Table.symbolList.contains(this.c)) {
+			while(!Table.symbolList.contains(this.c)) {
+				this.readChar();
+				if (!Table.symbolList.contains(this.c)) this.tkValue += this.c;
+				else this.currentCol--;
+			}
+		}
+		// String		
+		else if (this.c.equals('"')) {
+			this.readChar();
 			this.tkValue += this.c;
-		} else {
-			this.currentCol--;
-			this.c = this.tkValue.charAt(this.tkValue.length()-1);
+			while(!this.c.equals('"')) {
+				this.readChar();
+				this.tkValue += this.c; 
+			}
+		}
+		// Char		
+		else if (this.c.equals('\'')) {
+			String tmpTkValue = this.tkValue;
+			this.readChar();
+			tmpTkValue += this.c;
+			if (tmpTkValue.charAt(tmpTkValue.length()-1) == '\'') this.tkValue = tmpTkValue;
+			else {
+				this.readChar();
+				tmpTkValue += this.c;
+				if (tmpTkValue.charAt(tmpTkValue.length()-1) == '\'') this.tkValue = tmpTkValue;
+				else this.currentCol = this.currentCol - 2;
+			}
+		}
+		// Other stuff		
+		else {
+			this.readChar();
+			// >= <= ++ 			
+			if (Table.operators.containsKey(this.tkValue + this.c)) this.tkValue += this.c;
+			// Negative Unary
+			else if (this.tkValue.equals("-") && this.c == '1' && this.currentCol >= 3) {
+				String relationalOperatorCandidate = "";				
+				if (this.line.charAt(this.currentCol-2) == ' ') {
+					relationalOperatorCandidate += this.line.charAt(this.currentCol-4);
+					relationalOperatorCandidate += this.line.charAt(this.currentCol-3);
+				} 
+				else {
+					relationalOperatorCandidate += this.line.charAt(this.currentCol-3);
+					relationalOperatorCandidate += this.line.charAt(this.currentCol-2);
+				}
+				if (Table.relationalOperators.contains(relationalOperatorCandidate)) {
+					this.tkValue += this.c;
+				}
+			}
+			else this.currentCol--;
 		}
 		
-		// Reads the next token char while a symbol is not found
-		while(!Table.symbolList.contains(this.c)) {
-			this.readChar();
-			if (!Table.symbolList.contains(this.c)) this.tkValue += this.c;
-			else if(this.c != '\n') this.currentCol--;
-		}
 		
 		return new Token(this.tkLine, this.tkCol, this.categoryze(), this.tkValue);
 	}
@@ -77,8 +118,8 @@ public class Lexical {
 	}
 	
 	private void readChar() {
-		if (this.currentCol+1 <= this.line.length()-1) {
-			this.currentCol++;
+		this.currentCol++;
+		if (this.currentCol <= this.line.length()-1) {
 			this.c = this.line.charAt(this.currentCol);
 		}
 		else this.c = '\n';
@@ -93,6 +134,8 @@ public class Lexical {
 		else if (this.isTerminator()) return TokenCategory.TERM;
 		else if (this.isSeparator()) return Table.separators.get(this.tkValue);
 		else if (this.isOperator()) return Table.operators.get(this.tkValue);
+		else if (this.isString()) return TokenCategory.STRINGCONST;
+		else if (this.isNegativeUnary()) return TokenCategory.NEGUNOP;
 		else return TokenCategory.UNDEFINED;
 	}
 	
@@ -109,7 +152,7 @@ public class Lexical {
 	}
 
 	private boolean isId() {
-		return this.tkValue.matches("([a-z])+([a-zA-z\\_])*");
+		return this.tkValue.matches("([a-z])+([a-zA-Z\\_])*");
 	}
 	
 	private boolean isDelimiter() {
@@ -127,5 +170,13 @@ public class Lexical {
 	
 	private boolean isOperator() {
 		return Table.operators.containsKey(this.tkValue);
+	}
+
+	private boolean isString() {
+		return this.tkValue.matches("\"([a-zA-Z]*\\s*)*(\\d*\\s*)*(\\d+\\.\\d+)*\\s*\"");
+	}
+
+	private boolean isNegativeUnary() {
+		return this.tkValue.matches("-1");
 	}
 }
