@@ -1,0 +1,29 @@
+fibonacci( int limiter ) { 
+	int counter#
+
+	int fib1 = 1#
+	int fib2 = 1#
+	int fib3#
+
+	if(limiter == 0){
+		print('0')#
+	}#
+	
+	while(counter < limiter){
+		if(counter < 2){
+			print('1')#
+		}
+		else{
+			fib3 = fib1 + fib2#
+			fib1 = fib2#
+			fib2 = fib3#
+		}#
+		counter = counter + 1#
+	}#
+}#
+
+main(){
+	int limit#
+	read(limit)#
+	fibonacci(limit)#
+}#

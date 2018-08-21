@@ -28,7 +28,7 @@ public class Lexical {
 	
 	public Token nextToken() {
 		// First line or line already explored		
-		if (this.line == null || this.currentCol == this.line.length()-1) {
+		if (this.line == null || this.c == '\n') {
 			this.readLine();
 			if (this.line == null) return null;
 			tkLine++;
@@ -50,6 +50,11 @@ public class Lexical {
 			if (this.c == '\n') return this.nextToken();
 		}
 		
+		if (this.c == '$') {
+			this.c = '\n';
+			return this.nextToken();
+		}
+		 
 		this.tkValue += this.c;
 		
 		// Id, decimal numerical constant, integer numerical constant, reserved word 
@@ -134,6 +139,7 @@ public class Lexical {
 		else if (this.isTerminator()) return TokenCategory.TERM;
 		else if (this.isSeparator()) return Table.separators.get(this.tkValue);
 		else if (this.isOperator()) return Table.operators.get(this.tkValue);
+		else if (this.isChar()) return TokenCategory.CHARCONST;
 		else if (this.isString()) return TokenCategory.STRINGCONST;
 		else if (this.isNegativeUnary()) return TokenCategory.NEGUNOP;
 		else return TokenCategory.UNDEFINED;
@@ -152,7 +158,7 @@ public class Lexical {
 	}
 
 	private boolean isId() {
-		return this.tkValue.matches("([a-z])+([a-zA-Z\\_])*");
+		return this.tkValue.matches("([a-z])+([a-zA-Z\\_])*(\\d)*");
 	}
 	
 	private boolean isDelimiter() {
@@ -170,6 +176,10 @@ public class Lexical {
 	
 	private boolean isOperator() {
 		return Table.operators.containsKey(this.tkValue);
+	}
+	
+	private boolean isChar() {
+		return this.tkValue.matches("\\'[a-zA-Z]{0,1}\\'") || this.tkValue.matches("\\'\\d{0,1}\\'");
 	}
 
 	private boolean isString() {

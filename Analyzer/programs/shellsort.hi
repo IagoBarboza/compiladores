@@ -1,0 +1,36 @@
+int[] shellSort( int array[1000] ) { 
+	int h = 1#
+	int n = 1000#
+	
+	while(h < n){
+		h = h * 3 + 1#
+	    h = h / 3#
+	    int c, j#
+	    while (h > 0) {
+        for (int i = h; i < n; i = i +1) { 
+            c = array[i]#
+            j = i#
+            while (j >= h and array[j - h] > c) {
+                array[j] = array[j - h]#
+                j = j - h#
+            }
+            array[j] = c#
+        }
+        h = h / 2#
+	}
+	return array#
+}#
+
+main(){
+	int i = 0#
+	int unsorted[1000]#
+	int input#
+	read(input)#
+	while(input != -1) {
+		unsorted[i] = input#
+		read(input)#
+		i = i +1#
+	}
+	int sorted[1000]#
+	sorted = shellSort(unsorted)#
+}#

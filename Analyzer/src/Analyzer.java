@@ -8,10 +8,9 @@ public class Analyzer {
 	public static void main(String[] args) {
 		lexical = new Lexical(args[0]);
 		Token tk = lexical.nextToken();
-		System.out.println(tk);
 		while (tk != null) {
+			System.out.println(tk);
 			tk = lexical.nextToken();
-			if (tk != null) System.out.println(tk);
 		}
 	}	
 

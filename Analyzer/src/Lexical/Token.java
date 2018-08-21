@@ -8,8 +8,8 @@ public class Token {
 	private int column;
 	
 	public Token(int line, int column, TokenCategory category, String value) {
-		this.line = line;
-		this.column = column;
+		this.line = line+1;
+		this.column = column+1;
 		this.category = category;
 		this.value = value;
 	}
