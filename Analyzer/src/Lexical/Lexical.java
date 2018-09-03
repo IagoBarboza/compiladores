@@ -183,7 +183,7 @@ public class Lexical {
 	}
 
 	private boolean isString() {
-		return this.tkValue.matches("\"([a-zA-Z]*\\s*)*(\\d*\\s*)*(\\d+\\.\\d+)*\\s*\"");
+		return this.tkValue.matches("\\p{Print}*");
 	}
 
 	private boolean isNegativeUnary() {
