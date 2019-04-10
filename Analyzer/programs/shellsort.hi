@@ -9,7 +9,7 @@ shellSort(nums){
     repeater(int i, range(gap, n)) {
       int c = nums[i]#
       int j = i#
-      while (j >= gap && nums[j - gap] > c) {
+      while (j >= gap and nums[j - gap] > c) {
         nums[j] = nums[j - gap]#
         j = j - gap#
       }

@@ -44,7 +44,7 @@ public class Lexical {
 
 		this.tkValue = "";
 		this.tkCol++;
-		
+
 		this.readChar();
 		
 		// End of line
