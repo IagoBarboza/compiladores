@@ -48,6 +48,7 @@ public class Table {
 		reservedWords.put("if", TokenCategory.RWIF);
 		reservedWords.put("else", TokenCategory.RWELSE);
 		reservedWords.put("repeater", TokenCategory.RWREPEATER);
+		reservedWords.put("range", TokenCategory.RWRANGE);
 		reservedWords.put("while", TokenCategory.RWWHILE);
 		reservedWords.put("return", TokenCategory.RWRETURN);
 		reservedWords.put("none", TokenCategory.TNONE);

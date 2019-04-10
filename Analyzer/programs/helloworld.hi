@@ -1,5 +1,4 @@
 main () none {
 $ This is a comment
 	print ("Hello World")#
-  
 }#

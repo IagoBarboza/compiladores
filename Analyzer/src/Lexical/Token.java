@@ -14,6 +14,10 @@ public class Token {
 		this.value = value;
 	}
 	
+	public TokenCategory getCategory () {
+		return this.category;
+	}
+	
 	@Override
 	public String toString() {
 		return "[" + this.line + ", " + this.column + "]" + " (" + this.category.getCategoryValue() + ", " + this.category + ")" + " {" + this.value + "}";
