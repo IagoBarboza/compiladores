@@ -22,5 +22,9 @@ public class Token {
 	public String toString() {
 		return "[" + this.line + ", " + this.column + "]" + " (" + this.category.getCategoryValue() + ", " + this.category + ")" + " {" + this.value + "}";
 	}
+	
+	public void print() {
+		System.out.printf("[%04d, %04d] (%04d, %20s) {%s}\n", this.line, this.column, this.category.getCategoryValue(), this.category, this.value);
+	}
 
 }

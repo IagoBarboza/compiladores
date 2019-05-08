@@ -9,7 +9,7 @@ public class Analyzer {
 		lexical = new Lexical(args[0]);
 		Token tk = lexical.nextToken();
 		while (tk != null) {
-			System.out.println(tk);
+			tk.print();
 			tk = lexical.nextToken();
 		}
 	}	

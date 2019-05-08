@@ -161,7 +161,7 @@ public class Lexical {
 	}
 
 	private boolean isId() {
-		return this.tkValue.matches("([a-z])+([a-zA-Z\\_])*(\\d)*");
+		return this.tkValue.matches("([a-z])+(([a-zA-Z])*(\\_)*(\\d)*)*");
 	}
 	
 	private boolean isDelimiter() {
@@ -197,6 +197,8 @@ public class Lexical {
 							this.previousToken.getCategory() != TokenCategory.ID &&
 							this.previousToken.getCategory() != TokenCategory.INTNUMCONST && 
 							this.previousToken.getCategory() != TokenCategory.DECNUMCONST
+							// )
+							// ]
 					)
 				)
 			);
