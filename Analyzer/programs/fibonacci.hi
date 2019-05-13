@@ -1,13 +1,13 @@
-fibonacci( int limiter ) { 
-	int counter#
+function none fibonacci( int limiter ) { 
+	var int counter#
 
-	int fib1 = 1#
-	int fib2 = 1#
-	int fib3#
+	var int fib1 = 1#
+	var int fib2 = 1#
+	var int fib3#
 
 	if(limiter == 0){
 		print('0')#
-	}#
+	}
 	
 	while(counter < limiter){
 		if(counter < 2){
@@ -17,13 +17,13 @@ fibonacci( int limiter ) {
 			fib3 = fib1 + fib2#
 			fib1 = fib2#
 			fib2 = fib3#
-		}#
+		}
 		counter = counter + 1#
-	}#
-}#
+	}
+}
 
-main(){
-	int limit#
+function none main(){
+	var int limit#
 	read(limit)#
 	fibonacci(limit)#
-}#
+}

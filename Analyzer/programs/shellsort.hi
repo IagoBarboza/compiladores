@@ -1,14 +1,15 @@
-shellSort(nums){
-  int gap = 1#
-  int n = length(nums)#
+function none shellSort(int nums[]){
+  var int gap = 1#
+  var int n = length(nums)#
   while(gap < n) {
     gap = gap * 3 + 1#
   }
   gap = h / 3#
   while (gap > 0){
-    repeater(int i, range(gap, n)) {
-      int c = nums[i]#
-      int j = i#
+    var int i = 0#
+    repeater(i of 0 to 10, 1) {
+      var int c = nums[i]#
+      var int j = i#
       while (j >= gap and nums[j - gap] > c) {
         nums[j] = nums[j - gap]#
         j = j - gap#
@@ -17,3 +18,4 @@ shellSort(nums){
     }
     gap = gap / 2#
   }
+ }

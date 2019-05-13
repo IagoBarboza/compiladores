@@ -1,17 +1,17 @@
-import Lexical.Lexical;
-import Lexical.Token;
+import Syntatic.Syntatic;
 
 public class Analyzer {
 	
-	public static Lexical lexical;
+	public static Syntatic syntatic;
 
 	public static void main(String[] args) {
-		lexical = new Lexical(args[0]);
-		Token tk = lexical.nextToken();
-		while (tk != null) {
-			tk.print();
-			tk = lexical.nextToken();
-		}
+		new Syntatic(args[0]);
+//		lexical = new Lexical(args[0]);
+//		Token tk = lexical.nextToken();
+//		while (tk != null) {
+//			tk.print();
+//			tk = lexical.nextToken();
+//		}
 	}	
 
 }

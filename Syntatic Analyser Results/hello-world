@@ -1,0 +1,37 @@
+ 1  function none helloWorld() {
+          Program = LDecl
+          Decl = FuncDecl
+          FuncDecl = 'function' FType 'id' '(' LParam ')' '{' LSent '}'
+              [0001, 0001] (0042,             FUNCTION) {function}
+          FType = 'none'
+              [0001, 0003] (0002,                TNONE) {none}
+              [0001, 0005] (0001,                   ID) {helloWorld}
+              [0001, 0006] (0010,           PARAMBEGIN) {(}
+          LParam = epsilon
+              [0001, 0007] (0011,             PARAMEND) {)}
+              [0001, 0009] (0008,           SCOPEBEGIN) {{}
+   2  	print ("Hello World")#
+          LSent = Sent LSent
+          Sent = Command
+          Command = Print '#'
+          Print = 'print' '(' ConcatExp ')'
+              [0002, 0002] (0023,              RWPRINT) {print}
+              [0002, 0004] (0010,           PARAMBEGIN) {(}
+          ConcatExp = BooleanExp ConcatExpR
+          BooleanExp = BooleanTerm BooleanExpR
+          BooleanTerm = AritExp BooleanTermR
+          AritExp = AritTerm AritExpR
+          AritTerm = AritFact AritTermR
+          AritFact = 'stringConst'
+              [0002, 0005] (0021,          STRINGCONST) {"Hello World"}
+          AritTermR = epsilon
+          AritExpR = epsilon
+          BooleanTermR = epsilon
+          BooleanExpR = epsilon
+          ConcatExpR = epsilon
+              [0002, 0006] (0011,             PARAMEND) {)}
+              [0002, 0007] (0014,                 TERM) {#}
+   3  }
+          LSent = epsilon
+              [0003, 0001] (0009,             SCOPEEND) {}}
+          LDeclr = epsilon

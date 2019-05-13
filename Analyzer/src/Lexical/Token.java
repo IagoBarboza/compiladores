@@ -24,7 +24,15 @@ public class Token {
 	}
 	
 	public void print() {
-		System.out.printf("[%04d, %04d] (%04d, %20s) {%s}\n", this.line, this.column, this.category.getCategoryValue(), this.category, this.value);
+		System.out.printf("              [%04d, %04d] (%04d, %20s) {%s}\n", this.line, this.column, this.category.getCategoryValue(), this.category, this.value);
+	}
+	
+	public int getLine() {
+		return this.line;
+	}	
+	
+	public int getColumn() {
+		return this.column;
 	}
 
 }

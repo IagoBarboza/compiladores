@@ -1,4 +1,3 @@
-main () none {
-$ This is a comment
+function none helloWorld() {
 	print ("Hello World")#
-}#
+}

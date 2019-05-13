@@ -41,10 +41,15 @@ public class Lexical {
 			this.readLine();
 			return this.nextToken();
 		}
+		
+		// Is a new line
+		if (this.currentCol == -1) {
+			System.out.printf("%4d  %s\n", this.tkLine + 1, this.line);
+		}
 
 		this.tkValue = "";
 		this.tkCol++;
-
+		
 		this.readChar();
 		
 		// End of line
@@ -107,6 +112,7 @@ public class Lexical {
 		}
 		
 		this.previousToken = new Token(this.tkLine, this.tkCol, this.categoryze(), this.tkValue);
+		
 		
 		return this.previousToken;
 	}
